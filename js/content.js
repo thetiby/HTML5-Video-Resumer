@@ -55,12 +55,19 @@ function videoUpdate(event) {
 		if(video.resume_last_saved_time != time) {
 			video.resume_last_saved_time = time;
 
+			// Remove video to save storage space
+			if(time == 0) {
+				storageRemoveVideo(source);
+			}
+
 			// Save video time
-			var item = {
-				time: time,
-				date: Date.now()
-			};
-			storageSetVideo(source, item);
+			else {
+				var item = {
+					time: time,
+					date: Date.now()
+				};
+				storageSetVideo(source, item);
+			}
 		}
 	}
 
