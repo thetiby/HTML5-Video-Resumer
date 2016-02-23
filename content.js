@@ -43,7 +43,7 @@ function videoUpdate(event) {
 	var video = event.target;
 
 	// Check if source is present
-	var source = video.currentSrc;
+	var source = formatURL(video.currentSrc);
 	if(source == '') {
 		return;
 	}
@@ -83,6 +83,12 @@ function videoUpdate(event) {
 function videoEnded(event) {
 	// Remove video from storage
 	var video = event.target;
-	var source = video.currentSrc;
+	var source = formatURL(video.currentSrc);
 	chrome.storage.local.remove(source);
+}
+
+// Format URL
+function formatURL(url) {
+	// Strip parameters
+	return url.split('?')[0];
 }
