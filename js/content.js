@@ -30,9 +30,9 @@ function videoAdded(video) {
 	video.resume_last_saved_time = -1;
 
 	// Register events
-	video.addEventListener('loadedmetadata', videoUpdate);
 	video.addEventListener('timeupdate', videoUpdate);
 	video.addEventListener('playing', videoUpdate);
+	video.addEventListener('play', videoUpdate);
 	video.addEventListener('pause', videoUpdate);
 
 	video.addEventListener('ended', videoEnded);
