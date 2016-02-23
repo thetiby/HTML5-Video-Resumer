@@ -9,7 +9,7 @@ chrome.storage.local.get(null, function(items) {
 		if(items.hasOwnProperty(key)) {
 			var item = items[key];
 			if(item.date < minDate) {
-				chrome.storage.local.remove(key);
+				storageRemoveVideo(key);
 			}
 		}
 	}

@@ -56,24 +56,23 @@ function videoUpdate(event) {
 			video.resume_last_saved_time = time;
 
 			// Save video time
-			var save = {};
-			save[source] = {
+			var item = {
 				time: time,
 				date: Date.now()
 			};
-			chrome.storage.local.set(save);
+			storageSetVideo(source, item);
 		}
 	}
 
 	// Try to Resume
 	else {
 		// Load current time
-		chrome.storage.local.get(source, function(save) {
+		storageGetVideo(source, function(item) {
 			video.resume_initialized = true;
 
 			// Update video time
-			if(save[source] !== undefined) {
-				video.currentTime = save[source].time;
+			if(item[source] !== undefined) {
+				video.currentTime = item[source].time;
 			}
 		});
 	}
@@ -84,7 +83,7 @@ function videoEnded(event) {
 	// Remove video from storage
 	var video = event.target;
 	var source = formatURL(video.currentSrc);
-	chrome.storage.local.remove(source);
+	storageRemoveVideo(source);
 }
 
 // Format URL
